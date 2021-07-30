@@ -1,13 +1,13 @@
-import { getMovies, getMoviesById } from 'Api/Api';
+import { getMovies } from 'Api/Api';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // import s from 'components/Navigation/HomePage.module.css';
 
 const HomePage = () => {
-  //   const match = useRouteMatch();
+  // const match = useRouteMatch();
   const [movies, setMovies] = useState(null);
-  //   console.log(match);
+  // console.log(match);
 
   useEffect(() => {
     getMovies().then(setMovies);
