@@ -18,4 +18,21 @@ const getMovies = async () => {
   return trendingMovies;
 };
 
-export default getMovies;
+const getMoviesById = async id => {
+  const responceId = await axios.get(
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}`,
+  );
+  console.log(responceId.data);
+
+  //   const { id, genres, overview, title, vote_average, poster_path } =
+  //     responceId.data;
+
+  return responceId.data;
+
+  //   const { id, genres, overview, title, vote_average, poster_path } =
+  //     responceId.data;
+
+  //   return { id, genres, overview, title, vote_average, poster_path };
+};
+
+export { getMovies, getMoviesById };
