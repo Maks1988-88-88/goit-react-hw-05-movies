@@ -1,5 +1,5 @@
 import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
-import { getMoviesById, getMoviesReviews } from 'Api/Api';
+import { getMoviesById, getMoviesReviews, getMoviesCasts } from 'Api/Api';
 import { useState, useEffect } from 'react';
 import Reviews from 'components/Reviews/Reviews';
 
@@ -18,6 +18,7 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     getMoviesById(moviesId).then(setMoviesIdInfo);
     getMoviesReviews(moviesId).then(setMoviesIdReview);
+    getMoviesCasts(moviesId);
   }, [moviesId]);
 
   return (
@@ -47,7 +48,7 @@ const MovieDetailsPage = () => {
             <h3>cast</h3>
           </Route>
           <Route path={`${match.url}/reviews`}>
-            <Reviews moviesIdReview={moviesIdReview} />
+            {moviesIdReview && <Reviews moviesIdReview={moviesIdReview} />}
           </Route>
         </>
       )}

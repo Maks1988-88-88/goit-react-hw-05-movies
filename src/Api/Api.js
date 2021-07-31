@@ -37,8 +37,16 @@ const getMoviesReviews = async id => {
       return { author, content, id };
     },
   );
-  console.log(reviewsMovies);
+  // console.log(reviewsMovies);
   return reviewsMovies;
 };
 
-export { getMovies, getMoviesById, getMoviesReviews };
+const getMoviesCasts = async id => {
+  const responceCasts = await axios.get(
+    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`,
+  );
+  console.log(responceCasts);
+  return responceCasts;
+};
+
+export { getMovies, getMoviesById, getMoviesReviews, getMoviesCasts };

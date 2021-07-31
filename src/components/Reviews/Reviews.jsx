@@ -4,14 +4,17 @@
 const Reviews = ({ moviesIdReview }) => {
   return (
     <>
-      <h2>Reviews</h2>
-      {moviesIdReview &&
+      {moviesIdReview.length === 0 ? (
+        <p>No reviews</p>
+      ) : (
+        moviesIdReview &&
         moviesIdReview.map(review => (
           <div key={review.id}>
             <h3>{review.author}</h3>
             <p>{review.content}</p>
           </div>
-        ))}
+        ))
+      )}
     </>
   );
 };
