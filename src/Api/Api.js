@@ -46,11 +46,11 @@ const getMoviesCasts = async id => {
     `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`,
   );
 
-  const castsMovies = responceCasts.data.cast.map(
-    ({ character, id, name, profile_path }) => {
-      return { character, id, name, profile_path };
-    },
-  );
+  // const castsMovies = responceCasts.data.cast.map(
+  //   ({ character, id, name, profile_path }) => {
+  //     return { character, id, name, profile_path };
+  //   },
+  // );
 
   // console.log(responceCasts.data);
   // console.log(castsMovies);
@@ -58,4 +58,18 @@ const getMoviesCasts = async id => {
   return responceCasts.data;
 };
 
-export { getMovies, getMoviesById, getMoviesReviews, getMoviesCasts };
+const getMoviesQuery = async query => {
+  const responceCasts = await axios.get(
+    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`,
+  );
+  // console.log(responceCasts.data.results);
+  return responceCasts.data.results;
+};
+
+export {
+  getMovies,
+  getMoviesById,
+  getMoviesReviews,
+  getMoviesCasts,
+  getMoviesQuery,
+};
