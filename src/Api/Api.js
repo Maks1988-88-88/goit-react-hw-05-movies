@@ -45,8 +45,17 @@ const getMoviesCasts = async id => {
   const responceCasts = await axios.get(
     `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`,
   );
-  console.log(responceCasts);
-  return responceCasts;
+
+  const castsMovies = responceCasts.data.cast.map(
+    ({ character, id, name, profile_path }) => {
+      return { character, id, name, profile_path };
+    },
+  );
+
+  // console.log(responceCasts.data);
+  // console.log(castsMovies);
+
+  return responceCasts.data;
 };
 
 export { getMovies, getMoviesById, getMoviesReviews, getMoviesCasts };

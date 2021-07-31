@@ -2,6 +2,7 @@ import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
 import { getMoviesById, getMoviesReviews, getMoviesCasts } from 'Api/Api';
 import { useState, useEffect } from 'react';
 import Reviews from 'components/Reviews/Reviews';
+import Cast from 'components/Cast/Cast';
 
 // import s from 'components/Navigation/MoviesPage.module.css';
 
@@ -11,6 +12,7 @@ const MovieDetailsPage = () => {
 
   const [moviesIdInfo, setMoviesIdInfo] = useState(null);
   const [moviesIdReview, setMoviesIdReview] = useState(null);
+  const [moviesIdCast, setMoviesIdCast] = useState(null);
 
   const { moviesId } = useParams();
   // console.log(moviesId);
@@ -18,7 +20,7 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     getMoviesById(moviesId).then(setMoviesIdInfo);
     getMoviesReviews(moviesId).then(setMoviesIdReview);
-    getMoviesCasts(moviesId);
+    getMoviesCasts(moviesId).then(setMoviesIdCast);
   }, [moviesId]);
 
   return (
@@ -45,7 +47,7 @@ const MovieDetailsPage = () => {
             <li>Reviews</li>
           </Link>
           <Route path={`${match.url}/cast`}>
-            <h3>cast</h3>
+            {moviesIdCast && <Cast moviesIdCast={moviesIdCast} />}
           </Route>
           <Route path={`${match.url}/reviews`}>
             {moviesIdReview && <Reviews moviesIdReview={moviesIdReview} />}
