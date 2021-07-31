@@ -1,6 +1,7 @@
 import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
-import { getMoviesById } from 'Api/Api';
+import { getMoviesById, getMoviesReviews } from 'Api/Api';
 import { useState, useEffect } from 'react';
+import Reviews from 'components/Reviews/Reviews';
 
 // import s from 'components/Navigation/MoviesPage.module.css';
 
@@ -9,15 +10,15 @@ const MovieDetailsPage = () => {
   // console.log(match.url);
 
   const [moviesIdInfo, setMoviesIdInfo] = useState(null);
+  const [moviesIdReview, setMoviesIdReview] = useState(null);
 
   const { moviesId } = useParams();
   // console.log(moviesId);
 
   useEffect(() => {
     getMoviesById(moviesId).then(setMoviesIdInfo);
+    getMoviesReviews(moviesId).then(setMoviesIdReview);
   }, [moviesId]);
-
-  // const poster = `https://api.themoviedb.org/3}${moviesIdInfo.poster_path}`;
 
   return (
     <>
@@ -46,7 +47,7 @@ const MovieDetailsPage = () => {
             <h3>cast</h3>
           </Route>
           <Route path={`${match.url}/reviews`}>
-            <h3>reviews</h3>
+            <Reviews moviesIdReview={moviesIdReview} />
           </Route>
         </>
       )}

@@ -27,4 +27,18 @@ const getMoviesById = async id => {
   return responceId.data;
 };
 
-export { getMovies, getMoviesById };
+const getMoviesReviews = async id => {
+  const responceReviews = await axios.get(
+    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}`,
+  );
+  // console.log(responceReviews.data.results);
+  const reviewsMovies = responceReviews.data.results.map(
+    ({ author, content, id }) => {
+      return { author, content, id };
+    },
+  );
+  console.log(reviewsMovies);
+  return reviewsMovies;
+};
+
+export { getMovies, getMoviesById, getMoviesReviews };
