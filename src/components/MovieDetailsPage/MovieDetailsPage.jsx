@@ -1,6 +1,13 @@
-import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
+import {
+  useParams,
+  Route,
+  Link,
+  useRouteMatch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import { getMoviesById, getMoviesReviews, getMoviesCasts } from 'Api/Api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Reviews from 'components/Reviews/Reviews';
 import Cast from 'components/Cast/Cast';
 
@@ -15,7 +22,23 @@ const MovieDetailsPage = () => {
   const [moviesIdCast, setMoviesIdCast] = useState(null);
 
   const { moviesId } = useParams();
-  // console.log(moviesId);
+  // console.log('moviesId',moviesId);
+
+  const routerState = useRef(null);
+  // console.log(routerState.current);
+
+  const history = useHistory();
+  // console.log('history', history);
+  const location = useLocation();
+  // console.log('location', location.state);
+
+  useEffect(() => {
+    if (!routerState.current) {
+      routerState.current = location.state;
+    }
+  }, []);
+
+  // setTimeout(() => console.log('router.cur', routerState.current), 40);
 
   useEffect(() => {
     getMoviesById(moviesId).then(setMoviesIdInfo);
@@ -25,6 +48,18 @@ const MovieDetailsPage = () => {
 
   return (
     <>
+      <button
+        onClick={() => {
+          const paramsPath = routerState.current.params.pathname;
+          const paramsSearch = routerState.current.params.search;
+
+          // console.log(`${paramsPath}${paramsSearch}`);
+          history.push(`${paramsPath}${paramsSearch}`);
+        }}
+      >
+        Назад
+      </button>
+
       <h2>MovieDetailsPage</h2>
       {moviesIdInfo && (
         <>

@@ -12,6 +12,7 @@ const MoviesPage = () => {
   const location = useLocation();
   const queryUrl = new URLSearchParams(location.search).get('query');
   // console.log('queryUrl', queryUrl);
+  console.log(location);
 
   useEffect(() => {
     if (findFilm === null) return;
@@ -50,7 +51,15 @@ const MoviesPage = () => {
       {films &&
         films.map(film => (
           <li key={film.id}>
-            <Link to={`movies/${film.id}`}>{film.title}</Link>
+            {/* <Link to={`movies/${film.id}`}>{film.title}</Link> */}
+            <Link
+              to={{
+                pathname: `movies/${film.id}`,
+                state: { params: location },
+              }}
+            >
+              {film.title}
+            </Link>
           </li>
         ))}
     </>
