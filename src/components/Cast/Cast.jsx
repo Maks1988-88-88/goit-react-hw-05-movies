@@ -1,4 +1,5 @@
 // import s from 'components/Navigation/MoviesPage.module.css';
+import PropTypes from 'prop-types';
 
 const Cast = ({ moviesIdCast }) => {
   return (
@@ -31,6 +32,10 @@ const Cast = ({ moviesIdCast }) => {
         ))}
     </>
   );
+};
+
+Cast.propTypes = {
+  moviesIdCast: PropTypes.object.isRequired,
 };
 
 export default Cast;

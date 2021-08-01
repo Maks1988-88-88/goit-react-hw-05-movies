@@ -12,7 +12,7 @@ const MoviesPage = () => {
   const location = useLocation();
   const queryUrl = new URLSearchParams(location.search).get('query');
   // console.log('queryUrl', queryUrl);
-  console.log(location);
+  // console.log(location);
 
   useEffect(() => {
     if (findFilm === null) return;

@@ -36,7 +36,7 @@ const MovieDetailsPage = () => {
     if (!routerState.current) {
       routerState.current = location.state;
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // setTimeout(() => console.log('router.cur', routerState.current), 40);
 

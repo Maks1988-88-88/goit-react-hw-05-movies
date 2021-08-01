@@ -1,5 +1,6 @@
 // import s from 'components/Navigation/MoviesPage.module.css';
 // import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Reviews = ({ moviesIdReview }) => {
   return (
@@ -17,6 +18,10 @@ const Reviews = ({ moviesIdReview }) => {
       )}
     </>
   );
+};
+
+Reviews.propTypes = {
+  moviesIdReview: PropTypes.array.isRequired,
 };
 
 export default Reviews;
