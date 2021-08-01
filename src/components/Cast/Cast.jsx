@@ -7,11 +7,24 @@ const Cast = ({ moviesIdCast }) => {
       {moviesIdCast &&
         moviesIdCast.cast.map(cast => (
           <div key={cast.id}>
-            <img
+            {cast.profile_path === null ? (
+              <img
+                src={`https://demofree.sirv.com/nope-not-here.jpg?w=150`}
+                alt={cast.name}
+                width="150"
+              />
+            ) : (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                alt={cast.name}
+                width="150"
+              />
+            )}
+            {/* <img
               src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
               alt={cast.name}
               width="150"
-            />
+            /> */}
             <p>{cast.name}</p>
             <p>Character: {cast.character}</p>
           </div>
